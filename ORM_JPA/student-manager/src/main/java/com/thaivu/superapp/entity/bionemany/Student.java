@@ -87,11 +87,12 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", yob=" + yob +
-                ", gpa=" + gpa +
-                '}';
+//        return "Student{" +
+//                "id='" + id + '\'' +
+//                ", name='" + name + '\'' +
+//                ", yob=" + yob +
+//                ", gpa=" + gpa +
+//                '}';
+        return String.format("|%8s|%-20s|%4d|%4.1f|\n", id, name, yob, gpa);
     }
 }
