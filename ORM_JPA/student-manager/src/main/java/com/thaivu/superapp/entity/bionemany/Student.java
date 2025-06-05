@@ -1,9 +1,10 @@
-package com.thaivu.superapp.entity.unimany;
+package com.thaivu.superapp.entity.bionemany;
+
 
 import jakarta.persistence.*;
 
-//@Entity
-//@Table(name = "Student")
+@Entity
+@Table(name = "Student")
 public class Student {
 
     @Id
@@ -19,17 +20,28 @@ public class Student {
     @Column(name = "Gpa")
     private double gpa;
 
-    //1 STUDENT THUOC VE 1 CHUYEN NGANH
-    //TA SE KHAI BAO BIEN THAM CHIEU TRO? NGUOC VE MAJOR
-    //THUC CHAT DATABASE CHI LA COT KHOA NGOAI
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "MajorId")
-    private Major major; // dem key cua Major lam FK
+    //sv phai thuoc ve chuyen nganh nao do, chi 1 thoi, bien don, ko phai list
+    private Major major;
+    //CO LENH GAN MAJOR CUA SV NAY, CHO SV VAO HOC THEO CHUYEN NGANH
 
-    //set major cho 1 sv nao do
     public void setMajor(Major major) {
-        this.major = major;
+        this.major = major; // sv join vao chuyen nganh
+        //ve nguoc lai: chuyen nganh phai don nhan sv nay - this
+        //list sv cua major Major phai duoc them cai ban nay
+        //major.addStudent(this);
     }
+
+    //CO NHU CAU CHO BEN NGOAI BIET MINH HOC CHUYEN NGANH GI
+    public Major getMajor() {
+        return major;
+    }
+
+    //THEO QUAN DIEM CUA TABLE, THI STUDENT CAN CO COT KHOA NGOAI!!!!!!!!!!!!!!!!!!!!!!!!!
+    //DE TRO? SANG MAJOR
+    //THEO QUAN DIEM OOP, THI LA CLASS NAY CO THAM CHIEU (REFERENCE) CLASS KIA
+
 
     public Student() {
     }
@@ -80,6 +92,6 @@ public class Student {
                 ", name='" + name + '\'' +
                 ", yob=" + yob +
                 ", gpa=" + gpa +
-                ", major=" + major.getName() +'}';
+                '}';
     }
 }
